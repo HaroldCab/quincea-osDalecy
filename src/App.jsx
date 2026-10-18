@@ -164,7 +164,7 @@ function App() {
             <h3>{locationReady ? "El lugar de la celebración" : "La celebración"}</h3>
             <p>
               {locationReady
-                ? "Abre el mapa para ver cómo llegar."
+                ? "Domicilio donde se celebrarán mis XV años. Abre el mapa para ver cómo llegar."
                 : "En cuanto tengamos todos los detalles, te compartiré la ubicación."}
             </p>
           </div>
@@ -182,11 +182,20 @@ function App() {
             <span className="location-pending">Próximamente</span>
           )}
         </div>
+        <div className="guest-notes">
+          <article className="guest-note">
+            <span className="section-kicker">VESTIMENTA</span>
+            <p>El morado y el lila claro están reservados para la quinceañera. ¡Gracias por evitar estos tonos!</p>
+          </article>
+          <article className="guest-note">
+            <span className="section-kicker">REGALOS</span>
+            <p>Si no sabes qué regalarme, un regalo en efectivo será bien recibido.</p>
+          </article>
+        </div>
       </section>
 
       <footer className="footer">
         <Butterfly className="footer-butterfly" />
-        <p>Con amor, {quinceanera.name}</p>
         <span>24 · 10 · 2026</span>
       </footer>
     </main>
