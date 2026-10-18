@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { quinceanera } from "./config.js";
 
 const dateLabel = new Intl.DateTimeFormat("es-MX", {
@@ -58,6 +58,28 @@ function useCountdown(targetDate) {
 function App() {
   const countdown = useCountdown(quinceanera.date);
   const locationReady = Boolean(quinceanera.locationUrl);
+  const musicRef = useRef(null);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+  const [musicError, setMusicError] = useState("");
+
+  async function toggleMusic() {
+    const audio = musicRef.current;
+    if (!audio) return;
+
+    if (musicPlaying) {
+      audio.pause();
+      setMusicPlaying(false);
+      return;
+    }
+
+    try {
+      await audio.play();
+      setMusicPlaying(true);
+      setMusicError("");
+    } catch {
+      setMusicError("No se pudo iniciar la música. Inténtalo de nuevo.");
+    }
+  }
 
   return (
     <main className="page-shell">
@@ -69,8 +91,27 @@ function App() {
           <span className="wordmark-mark">D</span>
           <span>Una noche para recordar</span>
         </a>
+        <button
+          className="music-button"
+          type="button"
+          onClick={toggleMusic}
+          aria-pressed={musicPlaying}
+        >
+          <span aria-hidden="true">{musicPlaying ? "Ⅱ" : "▶"}</span>
+          {musicPlaying ? "Pausar música" : "Reproducir música"}
+        </button>
+        <audio
+          ref={musicRef}
+          loop
+          preload="none"
+          onPause={() => setMusicPlaying(false)}
+          onPlay={() => setMusicPlaying(true)}
+        >
+          <source src="/Maluma%20-%20El%20Perdedor%20.mp3.mpeg" type="audio/mpeg" />
+        </audio>
         <span className="topbar-date">24 · 10 · 2026</span>
       </header>
+      {musicError && <p className="music-error" role="status">{musicError}</p>}
 
       <section className="hero" id="inicio">
         <div className="hero-copy">
@@ -114,19 +155,6 @@ function App() {
             </p>
           )}
 
-          <a
-            className="location-button"
-            href={locationReady ? quinceanera.locationUrl : "#ubicacion"}
-            target={locationReady ? "_blank" : undefined}
-            rel={locationReady ? "noreferrer" : undefined}
-          >
-            <span className="button-icon" aria-hidden="true">⌖</span>
-            {locationReady ? "Ver ubicación" : "Ver detalles del lugar"}
-            <span className="button-arrow" aria-hidden="true">↗</span>
-          </a>
-          <p className="button-note">
-            {locationReady ? "Te espero para celebrar" : "La ubicación se compartirá muy pronto"}
-          </p>
         </div>
 
         <div className="portrait-column">

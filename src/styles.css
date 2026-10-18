@@ -80,6 +80,40 @@ a {
   border-bottom: 1px solid rgb(92 70 111 / 10%);
 }
 
+.music-button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 13px;
+  border: 1px solid #cbbbd7;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 68%);
+  color: #665476;
+  cursor: pointer;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.music-button:hover {
+  border-color: #81699b;
+  background: #f1eaf6;
+}
+
+.music-button:focus-visible {
+  outline: 2px solid #60487d;
+  outline-offset: 3px;
+}
+
+.music-error {
+  margin: 10px auto 0;
+  color: #8b3c50;
+  font-size: 12px;
+  text-align: center;
+}
+
 .wordmark {
   display: inline-flex;
   align-items: center;
@@ -556,11 +590,30 @@ h1 {
 }
 
 .map-link {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 15px;
+  border: 1px solid #81699b;
+  border-radius: 3px;
+  background: #79639a;
+  box-shadow: 0 5px 14px rgb(100 75 128 / 13%);
+  color: #fff;
   text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
 
 .map-link:hover {
-  text-decoration: underline;
+  transform: translateY(-1px);
+  background: #60487d;
+  box-shadow: 0 8px 18px rgb(100 75 128 / 20%);
+}
+
+.map-link:focus-visible {
+  outline: 2px solid #60487d;
+  outline-offset: 3px;
 }
 
 .guest-notes {
@@ -661,6 +714,13 @@ h1 {
   }
 
   .topbar-date {
+    font-size: 9px;
+  }
+
+  .music-button {
+    min-height: 34px;
+    gap: 5px;
+    padding: 0 8px;
     font-size: 9px;
   }
 
